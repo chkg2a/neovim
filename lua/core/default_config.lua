@@ -13,7 +13,6 @@ M.ui = {
   theme_toggle = { "onedark", "one_light" },
   theme = "onedark", -- default theme
   transparency = false,
-
   -- cmp themeing
   cmp = {
     icons = true,

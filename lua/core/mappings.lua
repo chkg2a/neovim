@@ -292,6 +292,7 @@ M.telescope = {
   },
 }
 
+<<<<<<< HEAD
 M.terminal = {
   n = {
     -- spawn new terms
