@@ -1,244 +1,277 @@
-local overrides = require("custom.configs.overrides")
+local overrides = require "custom.configs.overrides"
 local leet_arg = "leetcode.nvim"
 
 ---@type NvPluginSpec[]
 local plugins = {
 
-	-- Override plugin definition options
+  -- Override plugin definition options
 
+  {
+    "epwalsh/obsidian.nvim",
+    version = "*", -- recommended, use latest release instead of latest commit
+    lazy = true,
+    ft = "markdown",
+    -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
+    -- event = {
+    --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
+    --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/**.md"
+    --   "BufReadPre path/to/my-vault/**.md",
+    --   "BufNewFile path/to/my-vault/**.md",
+    -- },
+    dependencies = {
+      -- Required.
+      "nvim-lua/plenary.nvim",
+
+      -- see below for full list of optional dependencies 👇
+    },
+    opts = {
+      workspaces = {
+        {
+          name = "personal",
+          path = "~/vaults/personal",
+        },
+        {
+          name = "work",
+          path = "~/vaults/work",
+        },
+      },
+
+      -- see below for full list of options 👇
+    },
+  },
   {
     "mbbill/undotree",
     lazy = false,
   },
-	{
-		"neovim/nvim-lspconfig",
-		dependencies = {
-			-- format & linting
-			{
-				"jose-elias-alvarez/null-ls.nvim",
-				config = function()
-					require("custom.configs.null-ls")
-				end,
-			},
-		},
-		config = function()
-			require("plugins.configs.lspconfig")
-			require("custom.configs.lspconfig")
-			require("lspconfig").jdtls.setup({})
-			-- require("lspconfig").jedi_language_server.setup({})
-			require("lspconfig").pyright.setup({})
-			require("lspconfig").rust_analyzer.setup({
-				settings = {
-					["rust-analyzer"] = {
-						diagnostics = {
-							enable = false,
-						},
-					},
-				},
-			})
-		end, -- Override to setup mason-lspconfig
-		lazy = false,
-	},
-	{
-		"nvimdev/dashboard-nvim",
-		event = "VimEnter",
-		config = function()
-			require("dashboard").setup({
-				-- config
-			})
-		end,
-		dependencies = { { "nvim-tree/nvim-web-devicons" } },
-	},
-
-	{
-		"kawre/leetcode.nvim",
-		build = ":TSUpdate html",
-		dependencies = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim", -- required by telescope
-			"MunifTanjim/nui.nvim",
-
-			-- optional
-			"nvim-treesitter/nvim-treesitter",
-			"rcarriga/nvim-notify",
-			"nvim-tree/nvim-web-devicons",
-		},
-		lazy = leet_arg ~= vim.fn.argv()[1],
-		opts = {
-			arg = leet_arg,
-		},
-	},
-
-	{
-		"kdheepak/lazygit.nvim",
-		lazy = false,
-	},
-	{
-		"ThePrimeagen/harpoon",
-		-- lazy = false,
-	},
-
-	{
-		"CRAG666/code_runner.nvim",
-		config = function()
-			require("code_runner").setup({
-				filetype = {
-					cpp = {
-						"cd $dir &&",
-						"g++ $fileName -o out.$fileNameWithoutExt -std=c++20 &&",
-						"./out.$fileNameWithoutExt &&",
-						"rm ./out.$fileNameWithoutExt",
-					},
-					java = {
-						"cd $dir &&",
-						"javac $fileName &&",
-						"java $fileNameWithoutExt",
-					},
-					python = "python3 -u",
-					typescript = "deno run",
-					rust = {
-						"cd $dir &&",
-						"cargo build &&",
-						"cargo run",
-					},
-					js = {
-						"cd $dir &&",
-						"npm run dev",
-					},
-					cs = {
-						"cd $dir &&",
-						"mcs -out:$fileNameWithoutExt $fileName &&",
-						"$dir/$fileNameWithoutExt",
-					},
-				},
-			})
-		end,
-		-- lazy = false,
-	},
-
-	{
-		"mg979/vim-visual-multi",
-		lazy = false,
-	},
-	-- override plugin configs
-	{
-		"williamboman/mason.nvim",
-		opts = overrides.mason,
-	},
-
-	{
-		"derektata/lorem.nvim",
-		config = function()
-			require("lorem").setup({
-				sentenceLength = "mixedShort",
-				comma = 0.1,
-			})
-		end,
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      -- format & linting
+      {
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+          require "custom.configs.null-ls"
+        end,
+      },
+    },
+    config = function()
+      require "plugins.configs.lspconfig"
+      require "custom.configs.lspconfig"
+      require("lspconfig").jdtls.setup {}
+      -- require("lspconfig").jedi_language_server.setup({})
+      require("lspconfig").pyright.setup {}
+      require("lspconfig").rust_analyzer.setup {
+        settings = {
+          ["rust-analyzer"] = {
+            diagnostics = {
+              enable = false,
+            },
+          },
+        },
+      }
+    end, -- Override to setup mason-lspconfig
     lazy = false,
-	},
+  },
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      require("dashboard").setup {
+        -- config
+      }
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
 
-	{
-		"nvim-treesitter/nvim-treesitter",
-		opts = {
-			autotag = {
-				enable = true,
-			},
-		},
-	},
+  {
+    "kawre/leetcode.nvim",
+    build = ":TSUpdate html",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim", -- required by telescope
+      "MunifTanjim/nui.nvim",
 
-	{
-		"windwp/nvim-ts-autotag",
-		config = function()
-			require("nvim-ts-autotag").setup()
-		end,
-		lazy = false,
-	},
+      -- optional
+      "nvim-treesitter/nvim-treesitter",
+      "rcarriga/nvim-notify",
+      "nvim-tree/nvim-web-devicons",
+    },
+    lazy = leet_arg ~= vim.fn.argv()[1],
+    opts = {
+      arg = leet_arg,
+    },
+  },
 
-	{
-		"andweeb/presence.nvim",
-		config = function()
-			require("presence").setup({
-				auto_update = true,
-				neovim_image_text = "The One True Text Editor",
-				main_image = "file",
-				client_id = "793271441293967371",
-				log_level = nil,
-				debounce_timeout = 4,
-				enable_line_number = false,
-				blacklist = {},
-				buttons = false,
-				file_assets = {},
-				show_time = true,
+  {
+    "kdheepak/lazygit.nvim",
+    lazy = false,
+  },
+  {
+    "ThePrimeagen/harpoon",
+    -- lazy = false,
+  },
 
-				-- Rich Presence text options
-				editing_text = "Editing %s",
-				file_explorer_text = "Browsing %s",
-				git_commit_text = "Committing changes",
-				plugin_manager_text = "Managing plugins",
-				reading_text = "Reading %s",
-				workspace_text = "Working on %s",
-				line_number_text = "Line %s out of %s",
-			})
-		end,
-		lazy = false,
-	},
+  {
+    "CRAG666/code_runner.nvim",
+    config = function()
+      require("code_runner").setup {
+        filetype = {
+          cpp = {
+            "cd $dir &&",
+            "g++ $fileName -o out.$fileNameWithoutExt -std=c++20 &&",
+            "./out.$fileNameWithoutExt &&",
+            "rm ./out.$fileNameWithoutExt",
+          },
+          java = {
+            "cd $dir &&",
+            "javac $fileName &&",
+            "java $fileNameWithoutExt",
+          },
+          python = "python3 -u",
+          typescript = "deno run",
+          rust = {
+            "cd $dir &&",
+            "cargo build &&",
+            "cargo run",
+          },
+          js = {
+            "cd $dir &&",
+            "npm run dev",
+          },
+          cs = {
+            "cd $dir &&",
+            "mcs -out:$fileNameWithoutExt $fileName &&",
+            "$dir/$fileNameWithoutExt",
+          },
+        },
+      }
+    end,
+    -- lazy = false,
+  },
 
-	{
-		"ray-x/web-tools.nvim",
-		config = function()
-			require("web-tools").setup({
-				keymaps = {
-					rename = nil, -- by default use same setup of lspconfig
-					repeat_rename = ".", -- . to repeat
-				},
-				hurl = { -- hurl default
-					show_headers = false, -- do not show http headers
-					floating = false, -- use floating windows (need guihua.lua)
-					json5 = false, -- use json5 parser require json5 treesitter
-					formatters = { -- format the result by filetype
-						json = { "jq" },
-						html = { "prettier", "--parser", "html" },
-					},
-				},
-			})
-		end,
-		lazy = false,
-	},
+  {
+    "mg979/vim-visual-multi",
+    lazy = false,
+  },
+  -- override plugin configs
+  {
+    "williamboman/mason.nvim",
+    opts = overrides.mason,
+  },
 
-	{
-		"nullchilly/fsread.nvim",
-		lazy = false,
-	},
+  {
+    "derektata/lorem.nvim",
+    config = function()
+      require("lorem").setup {
+        sentenceLength = "mixedShort",
+        comma = 0.1,
+      }
+    end,
+    lazy = false,
+  },
 
-	{
-		"nvim-tree/nvim-tree.lua",
-		opts = overrides.nvimtree,
-		lazy = false,
-	},
+  {
+    "nvim-treesitter/nvim-treesitter",
+    opts = {
+      autotag = {
+        enable = true,
+      },
+    },
+  },
 
-	-- Install a plugin
-	{
-		"max397574/better-escape.nvim",
-		event = "InsertEnter",
-		config = function()
-			require("better_escape").setup()
-		end,
-	},
+  {
+    "windwp/nvim-ts-autotag",
+    config = function()
+      require("nvim-ts-autotag").setup()
+    end,
+    lazy = false,
+  },
 
-	-- To make a plugin not be loaded
-	-- {
-	--   "NvChad/nvim-colorizer.lua",
-	--   enabled = false
-	-- },
+  {
+    "andweeb/presence.nvim",
+    config = function()
+      require("presence").setup {
+        auto_update = true,
+        neovim_image_text = "The One True Text Editor",
+        main_image = "file",
+        client_id = "793271441293967371",
+        log_level = nil,
+        debounce_timeout = 4,
+        enable_line_number = false,
+        blacklist = {},
+        buttons = false,
+        file_assets = {},
+        show_time = true,
 
-	-- All NvChad plugins are lazy-loaded by default
-	-- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-	-- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
+        -- Rich Presence text options
+        editing_text = "Editing %s",
+        file_explorer_text = "Browsing %s",
+        git_commit_text = "Committing changes",
+        plugin_manager_text = "Managing plugins",
+        reading_text = "Reading %s",
+        workspace_text = "Working on %s",
+        line_number_text = "Line %s out of %s",
+      }
+    end,
+    lazy = false,
+  },
 
-	-- {
-	--   "mg979/vim-visual-multi",
-	--   lazy = false,
-	-- }
+  {
+    "ray-x/web-tools.nvim",
+    config = function()
+      require("web-tools").setup {
+        keymaps = {
+          rename = nil,         -- by default use same setup of lspconfig
+          repeat_rename = ".",  -- . to repeat
+        },
+        hurl = {                -- hurl default
+          show_headers = false, -- do not show http headers
+          floating = false,     -- use floating windows (need guihua.lua)
+          json5 = false,        -- use json5 parser require json5 treesitter
+          formatters = {        -- format the result by filetype
+            json = { "jq" },
+            html = { "prettier", "--parser", "html" },
+          },
+        },
+      }
+    end,
+    lazy = false,
+  },
+
+  {
+    "nullchilly/fsread.nvim",
+    lazy = false,
+  },
+
+  {
+    "nvim-tree/nvim-tree.lua",
+    opts = overrides.nvimtree,
+    lazy = false,
+  },
+
+  -- Install a plugin
+  {
+    "max397574/better-escape.nvim",
+    event = "InsertEnter",
+    config = function()
+      require("better_escape").setup()
+    end,
+  },
+
+  -- To make a plugin not be loaded
+  -- {
+  --   "NvChad/nvim-colorizer.lua",
+  --   enabled = false
+  -- },
+
+  -- All NvChad plugins are lazy-loaded by default
+  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
+  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
+
+  -- {
+  --   "mg979/vim-visual-multi",
+  --   lazy = false,
+  -- }
 }
 
 return plugins
