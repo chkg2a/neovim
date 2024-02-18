@@ -48,6 +48,7 @@ M.obsidian = {
     ["<A-i>"] = { "<cmd> ObsidianToday <CR>" },
     ["<A-o>"] = { "<cmd> ObsidianOpen <CR>" },
     ["<A-p>"] = { "<cmd> ObsidianPasteImg <CR>" },
+    ["<A-l>"] = { "<cmd> ObsidianLink <CR>" },
   }
 }
 -- more keybinds!
