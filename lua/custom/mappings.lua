@@ -4,7 +4,6 @@ local M = {}
 M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
-    ["p"] = {"+p"},
 	},
 	v = {
 		[">"] = { ">gv", "indent" },
@@ -42,6 +41,12 @@ M.undotree = {
 	n = {
 		["<A-u>"] = { "<cmd> UndotreeToggle <CR>" },
 	},
+}
+
+M.obsidian = {
+  n = {
+    ["<A-o>"] = { "<cmd> ObsidianToday <CR>" },
+  }
 }
 -- more keybinds!
 
