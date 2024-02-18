@@ -5,7 +5,7 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
-vim.api.nvim_set_option("clipboard", "unnamed")
+vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.opt_local.conceallevel = 2
 vim.lsp.set_log_level("debug")
 local enable_providers = {
