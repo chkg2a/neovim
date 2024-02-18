@@ -43,8 +43,18 @@ M.undotree = {
 	},
 }
 
+M.webtools = {
+  n = {
+    ["<A-o>"] = {"<cmd> BrowserPreview <CR>"},
+  },
+  v = {
+    ["<leader>r"] = {"<cmd> HurlRun <CR>"},
+  }
+}
+
 M.obsidian = {
   n = {
+    ["<A-s>"] = { "<cmd> ObsidianSearch <CR>" },
     ["<A-i>"] = { "<cmd> ObsidianToday <CR>" },
     ["<A-o>"] = { "<cmd> ObsidianOpen <CR>" },
     ["<A-p>"] = { "<cmd> ObsidianPasteImg <CR>" },

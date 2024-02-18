@@ -5,7 +5,6 @@ local leet_arg = "leetcode.nvim"
 local plugins = {
 
   -- Override plugin definition options
-
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
@@ -70,7 +69,10 @@ local plugins = {
       require "custom.configs.lspconfig"
       require("lspconfig").jdtls.setup {}
       -- require("lspconfig").jedi_language_server.setup({})
+      -- require("lspconfig").denols.setup {}
+      require("lspconfig").volar.setup {}
       require("lspconfig").pyright.setup {}
+      require("lspconfig").ast_grep.setup {}
       require("lspconfig").rust_analyzer.setup {
         settings = {
           ["rust-analyzer"] = {
@@ -157,7 +159,7 @@ local plugins = {
         },
       }
     end,
-    -- lazy = false,
+    lazy = false,
   },
 
   {
