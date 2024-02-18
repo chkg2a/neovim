@@ -45,7 +45,9 @@ M.undotree = {
 
 M.obsidian = {
   n = {
-    ["<A-o>"] = { "<cmd> ObsidianToday <CR>" },
+    ["<A-i>"] = { "<cmd> ObsidianToday <CR>" },
+    ["<A-o>"] = { "<cmd> ObsidianOpen <CR>" },
+    ["<A-p>"] = { "<cmd> ObsidianPasteImg <CR>" },
   }
 }
 -- more keybinds!

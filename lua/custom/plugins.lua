@@ -28,14 +28,19 @@ local plugins = {
       workspaces = {
         {
           name = "personal",
-          path = "~/.local/share/obsidian_ChK/ChK",
+          path = "~/.local/share/obsidian_ChK",
         },
       },
 
+      templates = {
+        subdir = "Templates",
+        date_format = "%Y-%m-%d-%a",
+        time_format = "%H:%M",
+      },
       -- see below for full list of options 👇
       daily_notes = {
         -- Optional, if you keep daily notes in a separate directory.
-        folder = "notes/dailies",
+        folder = "dailies",
         -- Optional, if you want to change the date format for the ID of daily notes.
         date_format = "%Y-%m-%d",
         -- Optional, if you want to change the date format of the default alias of daily notes.
@@ -182,7 +187,16 @@ local plugins = {
       autotag = {
         enable = true,
       },
+    config = function()
+      require("nvim-treesitter.configs").setup {
+        ensure_installed = { "markdown", "markdown_inline" },
+        highlight = {
+          enable = true,
+        },
+      }
+    end,
     },
+    lazy = false,
   },
 
   {
