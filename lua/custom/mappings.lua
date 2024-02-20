@@ -22,6 +22,12 @@ M.lazygit = {
 	},
 }
 
+M.markdownp = {
+  n = {
+    ["<leader>m"] = { "<cmd> MarkdownPreviewToggle <CR>"}
+  }
+}
+
 M.harpoon = {
 	n = {
 		["<A-r>"] = { "<cmd>lua require('harpoon.mark').add_file()<CR>" },
@@ -29,6 +35,12 @@ M.harpoon = {
 		["<A-j>"] = { "<cmd>lua require('harpoon.ui').nav_next()  <CR>" },
 		["<A-k>"] = { "<cmd>lua require('harpoon.ui').nav_prev()  <CR>" },
 	},
+}
+
+M.zen = {
+  n = {
+    ["<leader>z"] = {"<cmd> ZenMode <CR>"}
+  }
 }
 
 M.fsread = {
@@ -60,6 +72,7 @@ M.obsidian = {
     ["<A-p>"] = { "<cmd> ObsidianPasteImg <CR>" },
     ["<A-b>"] = { "<cmd> ObsidianBacklinks <CR>" },
     ["<A-n>"] = { "<cmd> ObsidianNew <CR>" },
+    ["<leader>t"] = { "<cmd> ObsidianTemplate <CR>" },
   },
   v = {
     ["<A-l>"] = { "<cmd> ObsidianLinkNew <CR>" },

@@ -1,10 +1,36 @@
 local overrides = require "custom.configs.overrides"
 local leet_arg = "leetcode.nvim"
+local ls = require "luasnip"
+local s = ls.snippet
+local t = ls.text_node
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.offsetEncoding = { "utf-16" }
+
 
 ---@type NvPluginSpec[]
 local plugins = {
-
   -- Override plugin definition options
+  {
+    "nvimdev/lspsaga.nvim",
+    lazy = false,
+  },
+  {
+    "windwp/nvim-autopairs",
+    event = "InsertEnter",
+    opts = {}, -- this is equalent to setup({}) function
+  },
+  {
+    "folke/zen-mode.nvim",
+    cmd = { "ZenMode" },
+  },
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
   {
     "epwalsh/obsidian.nvim",
     version = "*", -- recommended, use latest release instead of latest commit
@@ -73,6 +99,7 @@ local plugins = {
       require("lspconfig").volar.setup {}
       require("lspconfig").pyright.setup {}
       require("lspconfig").ast_grep.setup {}
+      require("lspconfig").clangd.setup { capabilities = capabilities }
       require("lspconfig").rust_analyzer.setup {
         settings = {
           ["rust-analyzer"] = {
@@ -117,11 +144,10 @@ local plugins = {
 
   {
     "kdheepak/lazygit.nvim",
-    lazy = false,
+    cmd = { "LazyGit" },
   },
   {
     "ThePrimeagen/harpoon",
-    -- lazy = false,
   },
 
   {
@@ -173,6 +199,13 @@ local plugins = {
   },
 
   {
+    "williamboman/mason-lspconfig.nvim",
+    config = function()
+      require("mason-lspconfig").setup()
+    end,
+  },
+
+  {
     "derektata/lorem.nvim",
     config = function()
       require("lorem").setup {
@@ -189,14 +222,14 @@ local plugins = {
       autotag = {
         enable = true,
       },
-    config = function()
-      require("nvim-treesitter.configs").setup {
-        ensure_installed = { "markdown", "markdown_inline" },
-        highlight = {
-          enable = true,
-        },
-      }
-    end,
+      config = function()
+        require("nvim-treesitter.configs").setup {
+          ensure_installed = { "markdown", "markdown_inline" },
+          highlight = {
+            enable = true,
+          },
+        }
+      end,
     },
     lazy = false,
   },
