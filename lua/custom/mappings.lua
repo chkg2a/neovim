@@ -16,6 +16,14 @@ M.runcode = {
 	},
 }
 
+M.leetcode = {
+  n = {
+    ["<A-g>"] = {"<cmd> Leet Run <CR>"},
+    ["<A-f>"] = {"<cmd> Leet Submit <CR>"},
+    ["<A-d>"] = {"<cmd> Leet desc <CR>"},
+  }
+}
+
 M.lazygit = {
 	n = {
 		["<leader>g"] = { "<cmd> LazyGit <CR>" },
