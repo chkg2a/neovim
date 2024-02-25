@@ -91,6 +91,7 @@ local plugins = {
           end,
           opts = { buffer = true },
         },
+      },
         follow_url_func = function(url)
           -- Open the URL in the default web browser.
           -- vim.fn.jobstart({"open", url})  -- Mac OS
@@ -105,7 +106,6 @@ local plugins = {
             return string.format("[[%s]]", opts.id)
           end
         end,
-      },
     },
   },
   {
