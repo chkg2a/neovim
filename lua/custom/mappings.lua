@@ -72,6 +72,12 @@ M.webtools = {
   }
 }
 
+M.url = {
+  n = {
+    ["gx"] = {"<cmd>URLOpenUnderCursor <CR>"}
+  }
+}
+
 M.obsidian = {
   n = {
     ["<A-s>"] = { "<cmd> ObsidianSearch <CR>" },

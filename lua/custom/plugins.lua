@@ -14,6 +14,18 @@ local plugins = {
   },
 
   {
+    "sontungexpt/url-open",
+    event = "VeryLazy",
+    cmd = "URLOpenUnderCursor",
+    config = function()
+      local status_ok, url_open = pcall(require, "url-open")
+      if not status_ok then
+        return
+      end
+      url_open.setup {}
+    end,
+  },
+  {
     "nvimdev/lspsaga.nvim",
     lazy = false,
   },
@@ -92,20 +104,20 @@ local plugins = {
           opts = { buffer = true },
         },
       },
-        follow_url_func = function(url)
-          -- Open the URL in the default web browser.
-          -- vim.fn.jobstart({"open", url})  -- Mac OS
-          vim.fn.jobstart { "xdg-open", url } -- linux
-        end,
-        wiki_link_func = function(opts)
-          if opts.id == nil then
-            return string.format("[[%s]]", opts.label)
-          elseif opts.label ~= opts.id then
-            return string.format("[[%s|%s]]", opts.id, opts.label)
-          else
-            return string.format("[[%s]]", opts.id)
-          end
-        end,
+      follow_url_func = function(url)
+        -- Open the URL in the default web browser.
+        -- vim.fn.jobstart({"open", url})  -- Mac OS
+        vim.fn.jobstart { "xdg-open", url } -- linux
+      end,
+      wiki_link_func = function(opts)
+        if opts.id == nil then
+          return string.format("[[%s]]", opts.label)
+        elseif opts.label ~= opts.id then
+          return string.format("[[%s|%s]]", opts.id, opts.label)
+        else
+          return string.format("[[%s]]", opts.id)
+        end
+      end,
     },
   },
   {
@@ -131,8 +143,9 @@ local plugins = {
       -- require("lspconfig").denols.setup {}
       require("lspconfig").volar.setup {}
       require("lspconfig").pyright.setup {}
-      require("lspconfig").ast_grep.setup {}
+      require("lspconfig").gopls.setup {}
       require("lspconfig").clangd.setup { capabilities = capabilities }
+      require("lspconfig").ast_grep.setup {}
       require("lspconfig").rust_analyzer.setup {
         settings = {
           ["rust-analyzer"] = {
@@ -188,6 +201,10 @@ local plugins = {
     config = function()
       require("code_runner").setup {
         filetype = {
+          go = {
+            "cd $dir &&",
+            "go run $fileName",
+          },
           cpp = {
             "cd $dir &&",
             "g++ $fileName -o out.$fileNameWithoutExt -std=c++20 &&",
