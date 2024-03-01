@@ -53,7 +53,7 @@ M.zen = {
 
 M.fsread = {
 	n = {
-		["<leader>o"] = { "<cmd> FSToggle <CR>" },
+		["<leader>f"] = { "<cmd> FSToggle <CR>" },
 	},
 }
 
@@ -65,7 +65,7 @@ M.undotree = {
 
 M.webtools = {
   n = {
-    ["<A-o>"] = {"<cmd> BrowserPreview <CR>"},
+    ["<leader>o"] = {"<cmd> BrowserPreview <CR>"},
   },
   v = {
     ["<leader>r"] = {"<cmd> HurlRun <CR>"},
