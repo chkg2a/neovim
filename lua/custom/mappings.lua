@@ -10,6 +10,15 @@ M.general = {
 	},
 }
 
+M.colorpicker = {
+  n = {
+    ["<C-c>"] = {"<cmd>PickColor<CR>"}
+  };
+  i = {
+    ["<C-c>"] = {"<cmd>PickColorInsert<CR>"}
+  }
+}
+
 M.runcode = {
 	n = {
 		["<leader>r"] = { "<cmd> RunCode <CR>" },
