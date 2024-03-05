@@ -9,6 +9,12 @@ capabilities.offsetEncoding = { "utf-16" }
 ---@type NvPluginSpec[]
 local plugins = {
   -- Override plugin definition options
+  {"ziontee113/color-picker.nvim",
+      config = function()
+          require("color-picker")
+      end,
+    lazy = false,
+  },
   {
     "folke/twilight.nvim",
   },
