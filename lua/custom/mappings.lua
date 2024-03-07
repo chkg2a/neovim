@@ -4,6 +4,8 @@ local M = {}
 M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
+    ["<leader><leader>v"] = {"<cmd>vsplit<cr>", "Virtical Split"},
+    ["<leader><leader>s"] = {"<cmd>split<cr>", "Horizontal Split"}
 	},
 	v = {
 		[">"] = { ">gv", "indent" },
