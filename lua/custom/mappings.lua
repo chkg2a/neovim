@@ -8,6 +8,8 @@ M.general = {
     ["<leader><leader>s"] = {"<cmd>split<cr>", "Horizontal Split"},
     ["<A-h>"] = {"<C-w>h","window left panel"},
     ["<A-l>"] = {"<C-w>l","window right panel"},
+    ["<A-j>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
+    ["<A-k>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
     ["<C-i>"] = {
       function()
         require("nvterm.terminal").toggle "float"
