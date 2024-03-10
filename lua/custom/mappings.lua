@@ -5,12 +5,57 @@ M.general = {
 	n = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<leader><leader>v"] = {"<cmd>vsplit<cr>", "Virtical Split"},
-    ["<leader><leader>s"] = {"<cmd>split<cr>", "Horizontal Split"}
+    ["<leader><leader>s"] = {"<cmd>split<cr>", "Horizontal Split"},
+    ["<A-h>"] = {"<C-w>h","window left panel"},
+    ["<A-l>"] = {"<C-w>l","window right panel"},
+    ["<C-i>"] = {
+      function()
+        require("nvterm.terminal").toggle "float"
+      end,
+      "Toggle floating term",
+    },
+
+    ["<C-h>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "Toggle horizontal term",
+    },
+
+    ["<C-v>"] = {
+      function()
+        require("nvterm.terminal").toggle "vertical"
+      end,
+      "Toggle vertical term",
+    },
 	},
 	v = {
 		[">"] = { ">gv", "indent" },
 	},
+  t = {
+    ["<C-i>"] = {
+      function()
+        require("nvterm.terminal").toggle "float"
+      end,
+      "Toggle floating term",
+    },
+
+    ["<C-h>"] = {
+      function()
+        require("nvterm.terminal").toggle "horizontal"
+      end,
+      "Toggle horizontal term",
+    },
+
+    ["<C-v>"] = {
+      function()
+        require("nvterm.terminal").toggle "vertical"
+      end,
+      "Toggle vertical term",
+    },
+  }
 }
+
 
 M.colorpicker = {
   n = {
