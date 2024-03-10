@@ -98,8 +98,8 @@ M.harpoon = {
 	n = {
 		["<A-r>"] = { "<cmd>lua require('harpoon.mark').add_file()<CR>" },
 		["<A-t>"] = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>" },
-		["<A-j>"] = { "<cmd>lua require('harpoon.ui').nav_next()  <CR>" },
-		["<A-k>"] = { "<cmd>lua require('harpoon.ui').nav_prev()  <CR>" },
+		["1"] = { "<cmd>lua require('harpoon.ui').nav_next()  <CR>" },
+		["2"] = { "<cmd>lua require('harpoon.ui').nav_prev()  <CR>" },
 	},
 }
 
