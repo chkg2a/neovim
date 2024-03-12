@@ -8,8 +8,10 @@ M.general = {
     ["<leader><leader>s"] = {"<cmd>split<cr>", "Horizontal Split"},
     ["<A-h>"] = {"<C-w>h","window left panel"},
     ["<A-l>"] = {"<C-w>l","window right panel"},
-    ["<A-j>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
-    ["<A-k>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
+    ["<A-j>"] = {"<C-w>j","window left panel"},
+    ["<A-k>"] = {"<C-w>k","window right panel"},
+    ["<A-S-h>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
+    ["<A-S-l>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
     ["<C-i>"] = {
       function()
         require("nvterm.terminal").toggle "float"
@@ -35,6 +37,12 @@ M.general = {
 		[">"] = { ">gv", "indent" },
 	},
   t = {
+    ["<A-h>"] = {"<C-w>h","window left panel"},
+    ["<A-l>"] = {"<C-w>l","window right panel"},
+    ["<A-j>"] = {"<C-w>j","window left panel"},
+    ["<A-k>"] = {"<C-w>k","window right panel"},
+    ["<A-S-h>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
+    ["<A-S-l>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
     ["<C-i>"] = {
       function()
         require("nvterm.terminal").toggle "float"
@@ -99,7 +107,9 @@ M.harpoon = {
 		["<A-r>"] = { "<cmd>lua require('harpoon.mark').add_file()<CR>" },
 		["<A-t>"] = { "<cmd>lua require('harpoon.ui').toggle_quick_menu()<CR>" },
 		["1"] = { "<cmd>lua require('harpoon.ui').nav_next()  <CR>" },
-		["2"] = { "<cmd>lua require('harpoon.ui').nav_prev()  <CR>" },
+		["2"] = { "<cmd>lua require('harpoon.ui').nav_next()  <CR>" },
+		["<A-S-j>"] = { "<cmd>lua require('harpoon.ui').nav_next()  <CR>" },
+		["<A-S-k"] = { "<cmd>lua require('harpoon.ui').nav_prev()  <CR>" },
 	},
 }
 
