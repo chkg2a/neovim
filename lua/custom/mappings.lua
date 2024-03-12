@@ -43,13 +43,6 @@ M.general = {
     ["<A-k>"] = {"<C-w>k","window right panel"},
     ["<A-S-h>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
     ["<A-S-l>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
-    ["<C-i>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-      "Toggle floating term",
-    },
-
     ["<C-h>"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
