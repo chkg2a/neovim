@@ -6,6 +6,13 @@ capabilities.offsetEncoding = { "utf-16" }
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "ahmedkhalf/project.nvim",
+    config = function()
+      require("project_nvim").setup()
+    end,
+    lazy = false,
+  },
+  {
     "ziontee113/color-picker.nvim",
     config = function()
       require "color-picker"
@@ -13,9 +20,20 @@ local plugins = {
     lazy = false,
   },
   {
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup ()
+    end,
+  },
+  {
+    "f-person/git-blame.nvim",
+    lazy = false,
+  },
+  {
     "folke/twilight.nvim",
   },
-
   {
     "sontungexpt/url-open",
     event = "VeryLazy",
@@ -48,6 +66,18 @@ local plugins = {
     build = function()
       vim.fn["mkdp#util#install"]()
     end,
+  },
+  {
+    "ggandor/leap.nvim",
+    dependencies = {
+      "tpope/vim-repeat",
+    },
+    config = function()
+      require("leap").add_default_mappings = false
+      vim.keymap.set({ "n", "x", "o" }, "s", "<Plug>(leap-forward)")
+      vim.keymap.set({ "n", "x", "o" }, "S", "<Plug>(leap-backward)")
+    end,
+    lazy = false,
   },
   {
     "epwalsh/obsidian.nvim",
@@ -144,14 +174,12 @@ local plugins = {
       require("lspconfig").jdtls.setup {}
       -- require("lspconfig").jedi_language_server.setup({})
       require("lspconfig").denols.setup {}
-      require("lspconfig").volar.setup {}
-      require("lspconfig").tsserver.setup {}
+      -- require("lspconfig").biome.setup {}
+      require("lspconfig").marksman.setup {}
       require("lspconfig").cssls.setup {}
       require("lspconfig").pyright.setup {}
       require("lspconfig").gopls.setup {}
       require("lspconfig").clangd.setup { capabilities = capabilities }
-      require("lspconfig").ast_grep.setup {}
-      require("lspconfig").eslint.setup {}
       require("lspconfig").rust_analyzer.setup {
         settings = {
           ["rust-analyzer"] = {
