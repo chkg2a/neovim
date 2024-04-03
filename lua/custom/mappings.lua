@@ -6,66 +6,84 @@ M.general = {
 		[";"] = { ":", "enter command mode", opts = { nowait = true } },
     ["<leader><leader>v"] = {"<cmd>vsplit<cr>", "Virtical Split"},
     ["<leader><leader>s"] = {"<cmd>split<cr>", "Horizontal Split"},
+    ["<C-h>"] = {"<C-w>h","window left panel"},
+    ["<C-l>"] = {"<C-w>l","window right panel"},
     ["<A-h>"] = {"<C-w>h","window left panel"},
     ["<A-l>"] = {"<C-w>l","window right panel"},
     ["<A-j>"] = {"<C-w>j","window left panel"},
     ["<A-k>"] = {"<C-w>k","window right panel"},
     ["<A-S-h>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
     ["<A-S-l>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
-    ["<C-i>"] = {
-      function()
-        require("nvterm.terminal").toggle "float"
-      end,
-      "Toggle floating term",
-    },
-
-    ["<C-h>"] = {
+    ["<C-8>"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
       end,
       "Toggle horizontal term",
     },
 
-    ["<C-v>"] = {
+    ["<C-9>"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
       "Toggle vertical term",
+    },
+
+    ["<C-0>"] = {
+      function()
+        require("nvterm.terminal").toggle "float"
+      end,
+      "Toggle floating term",
     },
 	},
 	v = {
 		[">"] = { ">gv", "indent" },
 	},
   t = {
+    ["<C-h>"] = {"<C-w>h","window left panel"},
+    ["<C-l>"] = {"<C-w>l","window right panel"},
     ["<A-h>"] = {"<C-w>h","window left panel"},
     ["<A-l>"] = {"<C-w>l","window right panel"},
     ["<A-j>"] = {"<C-w>j","window left panel"},
     ["<A-k>"] = {"<C-w>k","window right panel"},
     ["<A-S-h>"] = {"<cmd>2winc > <cr>","incrase window left panel"},
     ["<A-S-l>"] = {"<cmd>2winc < <cr>","incrase window right panel"},
-    ["<C-h>"] = {
+    ["<C-8>"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
       end,
       "Toggle horizontal term",
     },
 
-    ["<C-v>"] = {
+    ["<C-9>"] = {
       function()
         require("nvterm.terminal").toggle "vertical"
       end,
       "Toggle vertical term",
     },
+    ["<C-0>"] = {
+      function()
+        require("nvterm.terminal").toggle "float"
+      end,
+      "Toggle floating term",
+    },
   }
 }
 
+M.nvimtree = {
+  plugin = true,
+
+  n = {
+    -- toggle
+    ["<leader>e"] = { "<cmd> NvimTreeToggle <CR>", "Toggle nvimtree" },
+  },
+}
 
 M.colorpicker = {
   n = {
-    ["<C-c>"] = {"<cmd>PickColor<CR>"}
+    ["<C-4>"] = {"<cmd>PickColor<CR>"}
   };
   i = {
-    ["<C-c>"] = {"<cmd>PickColorInsert<CR>"}
+    ["<C-4>"] = {"<cmd>PickColorInsert<CR>"}
   }
 }
 
