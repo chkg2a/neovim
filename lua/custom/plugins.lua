@@ -1,18 +1,15 @@
 local overrides = require "custom.configs.overrides"
 local leet_arg = "leetcode.nvim"
--- local ls = require "luasnip"
--- local s = ls.snippet
--- local t = ls.text_node
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.offsetEncoding = { "utf-16" }
 
 ---@type NvPluginSpec[]
 local plugins = {
-  -- Override plugin definition options
-  {"ziontee113/color-picker.nvim",
-      config = function()
-          require("color-picker")
-      end,
+  {
+    "ziontee113/color-picker.nvim",
+    config = function()
+      require "color-picker"
+    end,
     lazy = false,
   },
   {
@@ -146,12 +143,15 @@ local plugins = {
       require "custom.configs.lspconfig"
       require("lspconfig").jdtls.setup {}
       -- require("lspconfig").jedi_language_server.setup({})
-      -- require("lspconfig").denols.setup {}
+      require("lspconfig").denols.setup {}
       require("lspconfig").volar.setup {}
+      require("lspconfig").tsserver.setup {}
+      require("lspconfig").cssls.setup {}
       require("lspconfig").pyright.setup {}
       require("lspconfig").gopls.setup {}
       require("lspconfig").clangd.setup { capabilities = capabilities }
       require("lspconfig").ast_grep.setup {}
+      require("lspconfig").eslint.setup {}
       require("lspconfig").rust_analyzer.setup {
         settings = {
           ["rust-analyzer"] = {
@@ -210,6 +210,15 @@ local plugins = {
           go = {
             "cd $dir &&",
             "go run $fileName",
+          },
+          reactjs = {
+            "cd $dir &&",
+            "npm run dev",
+          },
+          kotlin = {
+            "cd $dir &&",
+            "kotlinc $fileName &&",
+            "kotlin $fileNameWithoutExtKt",
           },
           cpp = {
             "cd $dir &&",
@@ -274,7 +283,26 @@ local plugins = {
 
   {
     "nvim-treesitter/nvim-treesitter",
+    dependencies = {
+      "windwp/nvim-ts-autotag",
+    },
     opts = {
+      ensure_installed = {
+        -- defaults
+        "vim",
+        "lua",
+        "markdown",
+        "html",
+        "css",
+        "javascript",
+        "typescript",
+        "json",
+        "c_sharp",
+        "sql",
+        "yaml",
+        "xml",
+        "tsx",
+      },
       autotag = {
         enable = true,
       },
@@ -292,10 +320,11 @@ local plugins = {
 
   {
     "windwp/nvim-ts-autotag",
+    ft = { "typescriptreact", "tsx" },
+    lazy = false,
     config = function()
       require("nvim-ts-autotag").setup()
     end,
-    lazy = false,
   },
 
   {
@@ -359,8 +388,6 @@ local plugins = {
     opts = overrides.nvimtree,
     lazy = false,
   },
-
-  -- Install a plugin
   {
     "max397574/better-escape.nvim",
     event = "InsertEnter",
@@ -368,21 +395,10 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
-
-  -- To make a plugin not be loaded
-  -- {
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
-
-  -- All NvChad plugins are lazy-loaded by default
-  -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
-  -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example
-
-  -- {
-  --   "mg979/vim-visual-multi",
-  --   lazy = false,
-  -- }
+  {
+    "NvChad/nvim-colorizer.lua",
+    enabled = false,
+  },
 }
 
 return plugins
