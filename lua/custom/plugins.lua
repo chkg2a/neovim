@@ -6,6 +6,10 @@ capabilities.offsetEncoding = { "utf-16" }
 ---@type NvPluginSpec[]
 local plugins = {
   {
+    "wakatime/vim-wakatime",
+    lazy = false,
+  },
+  {
     "ahmedkhalf/project.nvim",
     config = function()
       require("project_nvim").setup()
