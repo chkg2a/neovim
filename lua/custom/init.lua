@@ -8,6 +8,7 @@
 vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.g.vim_markdown_frontmatter = 1
 vim.opt.conceallevel = 2
+vim.opt.relativenumber = true
 vim.g.markdown_fenced_languages = {
   "ts=typescript"
 }
