@@ -24,7 +24,7 @@ local plugins = {
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
     event = "VeryLazy",
     config = function()
-      require("nvim-surround").setup ()
+      require("nvim-surround").setup()
     end,
   },
   {
@@ -173,8 +173,11 @@ local plugins = {
       require "custom.configs.lspconfig"
       require("lspconfig").jdtls.setup {}
       -- require("lspconfig").jedi_language_server.setup({})
-      require("lspconfig").denols.setup {}
+      -- require("lspconfig").denols.setup {}
       -- require("lspconfig").biome.setup {}
+      require("lspconfig").astro.setup {}
+      require("lspconfig").tsserver.setup {}
+      require("lspconfig").tailwindcss.setup {}
       require("lspconfig").marksman.setup {}
       require("lspconfig").cssls.setup {}
       require("lspconfig").pyright.setup {}
