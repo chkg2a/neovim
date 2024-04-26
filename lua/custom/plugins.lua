@@ -105,7 +105,7 @@ local plugins = {
       workspaces = {
         {
           name = "personal",
-          path = "~/.local/share/obsidian_ChK",
+          path = "~/.local/share/obsidian",
         },
       },
 
@@ -179,6 +179,7 @@ local plugins = {
       -- require("lspconfig").jedi_language_server.setup({})
       -- require("lspconfig").denols.setup {}
       -- require("lspconfig").biome.setup {}
+      require("lspconfig").asm_lsp.setup {}
       require("lspconfig").astro.setup {}
       require("lspconfig").tsserver.setup {}
       require("lspconfig").tailwindcss.setup {}
@@ -256,7 +257,7 @@ local plugins = {
             "kotlin $fileNameWithoutExtKt",
           },
           cpp = {
-            "cd $dir &&",
+            "cd \'$dir\' &&",
             "g++ $fileName -o out.$fileNameWithoutExt -std=c++20 &&",
             "./out.$fileNameWithoutExt &&",
             "rm ./out.$fileNameWithoutExt",
