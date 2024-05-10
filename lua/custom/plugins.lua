@@ -105,7 +105,7 @@ local plugins = {
       workspaces = {
         {
           name = "personal",
-          path = "~/.local/share/obsidian",
+          path = "~/.local/share/obsidian_ChK",
         },
       },
 
@@ -258,8 +258,8 @@ local plugins = {
           },
           cpp = {
             "cd \'$dir\' &&",
-            "g++ $fileName -o out.$fileNameWithoutExt -std=c++20 &&",
-            "./out.$fileNameWithoutExt &&",
+            "g++ $fileName -o out.$fileNameWithoutExt -Ofast -march=native -std=c++20 &&",
+            "time ./out.$fileNameWithoutExt &&",
             "rm ./out.$fileNameWithoutExt",
           },
           java = {
