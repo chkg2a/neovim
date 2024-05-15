@@ -15,6 +15,19 @@ M.general = {
     ["<A-S-h>"] = { "<cmd>2winc > <cr>", "incrase window left panel" },
     ["<A-S-l>"] = { "<cmd>2winc < <cr>", "incrase window right panel" },
     ["<C-5>"]= { "<cmd>vimgrep /\\w\\+/j % | copen<cr>","quick fix"},
+    ["gD"] = {
+      function()
+        vim.lsp.buf.declaration()
+      end,
+      "LSP declaration",
+    },
+
+    ["gd"] = {
+      function()
+        vim.lsp.buf.definition()
+      end,
+      "LSP definition",
+    },
     ["<C-8>"] = {
       function()
         require("nvterm.terminal").toggle "horizontal"
@@ -186,6 +199,12 @@ M.url = {
   },
 }
 
+M.transparent = {
+  n = {
+    ["<leader>ts"] = { "<cmd>TransparentToggle <CR>" },
+  }
+}
+
 M.obsidian = {
   n = {
     ["<A-s>"] = { "<cmd> ObsidianSearch <CR>" },
@@ -194,7 +213,6 @@ M.obsidian = {
     ["<A-p>"] = { "<cmd> ObsidianPasteImg <CR>" },
     ["<A-b>"] = { "<cmd> ObsidianBacklinks <CR>" },
     ["<A-n>"] = { "<cmd> ObsidianNew <CR>" },
-    ["<leader>t"] = { "<cmd> ObsidianTemplate <CR>" },
   },
   v = {
     ["<A-l>"] = { "<cmd> ObsidianLinkNew <CR>" },
