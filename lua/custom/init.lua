@@ -5,7 +5,6 @@
 --   pattern = "*",
 --   command = "tabdo wincmd =",
 -- })
-vim.api.nvim_set_option("clipboard", "unnamedplus")
 vim.g.vim_markdown_frontmatter = 1
 vim.opt.conceallevel = 2
 vim.opt.relativenumber = true

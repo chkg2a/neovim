@@ -1,7 +1,6 @@
 local overrides = require "custom.configs.overrides"
 local leet_arg = "leetcode.nvim"
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities.offsetEncoding = { "utf-16" }
 
 ---@type NvPluginSpec[]
 local plugins = {
@@ -181,7 +180,7 @@ local plugins = {
       -- require("lspconfig").biome.setup {}
       require("lspconfig").asm_lsp.setup {}
       require("lspconfig").astro.setup {}
-      require("lspconfig").tsserver.setup {}
+      require("lspconfig").ts_ls.setup {}
       require("lspconfig").tailwindcss.setup {}
       require("lspconfig").marksman.setup {}
       require("lspconfig").cssls.setup {}
@@ -259,8 +258,11 @@ local plugins = {
           cpp = {
             "cd '$dir' &&",
             "g++ $fileName -o out.$fileNameWithoutExt -Ofast -march=native -std=c++20 &&",
-            "time ./out.$fileNameWithoutExt &&",
-            "rm ./out.$fileNameWithoutExt",
+            "/usr/bin/time -o memUsage.txt -f%M ./out.$fileNameWithoutExt &&",
+            "echo '' &&",
+            "cat memUsage.txt | awk '{printf \"Memory Usage: %.1f MB\\n\", $1/1024}' &&",
+            "rm ./out.$fileNameWithoutExt &&",
+            "rm ./memUsage.txt",
           },
           java = {
             "cd $dir &&",
@@ -305,17 +307,17 @@ local plugins = {
       require("mason-lspconfig").setup()
     end,
   },
-
   {
     "derektata/lorem.nvim",
     config = function()
-      require("lorem").setup {
-        sentenceLength = "mixedShort",
-        comma = 0.1,
+      require("lorem").opts {
+        sentenceLength = "medium",
+        comma_chance = 0.2,
+        max_commas_per_sentence = 2,
       }
     end,
-    lazy = false,
   },
+
   {
     "nvim-treesitter/nvim-treesitter",
     opts = {
